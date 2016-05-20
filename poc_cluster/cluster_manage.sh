@@ -48,6 +48,11 @@ function usage() {
 # - - - - -
 
 
+if [ $( id -u ) -ne 0 ]; then
+  echo "$0 must be run as root. Aborting..."
+  exit 1
+fi
+
 case "$1" in
   start)
     [ ! -d ${MONGODB_DIR} ] && mkdir -p ${MONGODB_DIR}
