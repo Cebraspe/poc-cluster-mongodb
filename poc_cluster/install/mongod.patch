@@ -1,0 +1,19 @@
+--- mongod	2016-05-19 22:39:54.480000000 -0300
++++ mongod.new	2016-05-19 22:39:19.608000000 -0300
+@@ -88,6 +88,16 @@
+     exit 0
+ fi
+ 
++# START transparent_hugepage hook
++if test -f /sys/kernel/mm/transparent_hugepage/enabled; then
++  echo never > /sys/kernel/mm/transparent_hugepage/enabled
++fi
++
++if test -f /sys/kernel/mm/transparent_hugepage/defrag; then
++  echo never > /sys/kernel/mm/transparent_hugepage/defrag
++fi
++# END transparent_hugepage hook
++
+ . /lib/lsb/init-functions
+ 
+ STARTTIME=1
